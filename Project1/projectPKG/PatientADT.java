@@ -1,6 +1,6 @@
 package projectPKG;
 import java.util.ArrayList;
-
+//
 public interface PatientADT {
 	
 	public void setId (String id);  // sets the unique identifier of this patient

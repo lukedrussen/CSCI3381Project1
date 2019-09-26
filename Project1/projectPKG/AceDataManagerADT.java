@@ -1,7 +1,7 @@
 package projectPKG;
 import java.io.IOException;
 import java.util.ArrayList;
-
+//
 public interface AceDataManagerADT {
 	public void addPatient (PatientADT p); //Adds a new patient to the data set
 	public PatientADT getPatient (String id); //returns the patient with the given identifier, null if the patient is not in the data set
