@@ -39,8 +39,10 @@ public class MyMain {
 		System.out.println(myData);
 		
 		temp = myData.getPatient("100");
-		temp.addACE("PENIS");
+		temp.addACE("Cool Thing");
 		System.out.println(myData);
+		
+		System.out.println(myData.getRiskFactors(p1.getACEs()));
 		
 		myData.writeToFile();
 
