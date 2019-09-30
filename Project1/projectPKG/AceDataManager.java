@@ -1,8 +1,12 @@
 package projectPKG;
 //
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 
 public class AceDataManager<T> implements AceDataManagerADT {
 
@@ -87,7 +91,7 @@ public class AceDataManager<T> implements AceDataManagerADT {
 
 
 	public void writeToFile() throws IOException {
-
+		//Found on Stack Overflow
 		FileWriter writer = new FileWriter("output.txt"); 
 
 		for(PatientADT s: Patients) {
@@ -99,7 +103,7 @@ public class AceDataManager<T> implements AceDataManagerADT {
 
 
 	public void writeToFile(String fn) throws IOException {
-
+		//Found On Stack Overflow
 		FileWriter writer = new FileWriter(fn); 
 
 		for(PatientADT s: Patients) {
@@ -117,4 +121,49 @@ public class AceDataManager<T> implements AceDataManagerADT {
 		return x;	
 	}
 
+
+	@Override
+	public void readFile(String fn){
+		BufferedReader lineReader = null;
+
+		try {			
+
+			lineReader = new BufferedReader(new InputStreamReader(new FileInputStream(fn), Charset.forName("UTF-8")));  
+
+			String line = null;
+			while ((line = lineReader.readLine())!=null) {
+
+				String[] tokens = line.split(",");
+				String id = tokens[0];
+				String name = tokens[1];
+				String temp =tokens[2];
+				temp =temp.substring(1,temp.length());
+				String temp2 = tokens[tokens.length-1];
+				temp2 = temp2.substring(1,temp2.length()-1);
+				
+				PatientADT p = new Patient(name,id);
+
+				for(int i = 2; i<tokens.length; i++) {
+					if(i==2)
+						p.addACE(temp);
+					else if (i==tokens.length-1)
+						p.addACE(temp2);
+					else p.addACE(tokens[i]);
+				}
+
+				addPatient(p);
+
+
+			}
+		} catch (Exception e) {
+			System.err.println("there was a problem with the file.  either no such file or format error");
+		} finally {
+			if (lineReader != null)
+				try {
+					lineReader.close();
+				} catch (IOException e) {
+					System.err.println("could not close BufferedReader");
+				}
+		}
+	}
 }

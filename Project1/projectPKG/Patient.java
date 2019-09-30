@@ -62,7 +62,7 @@ public class Patient<T> implements PatientADT{
 
 	
 	public String toString() {
-		return ("Name: " + NAME + "\tID: " + ID + "\t\tACEs: " + ACE);
+		return (NAME + "," + ID + ","+ ACE);
 	}
 
 }
