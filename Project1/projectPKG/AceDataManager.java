@@ -134,14 +134,14 @@ public class AceDataManager<T> implements AceDataManagerADT {
 			while ((line = lineReader.readLine())!=null) {
 
 				String[] tokens = line.split(",");
-				String id = tokens[0];
-				String name = tokens[1];
+				String name = tokens[0];
+				String id = tokens[1];
 				String temp =tokens[2];
 				temp =temp.substring(1,temp.length());
 				String temp2 = tokens[tokens.length-1];
 				temp2 = temp2.substring(1,temp2.length()-1);
 				
-				PatientADT p = new Patient(name,id);
+				PatientADT p = new Patient(id,name);
 
 				for(int i = 2; i<tokens.length; i++) {
 					if(i==2)
